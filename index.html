@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Happy Birthday ❤️</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .screen {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 25px;
+      }
+
+      .card {
+        background: white;
+        width: 100%;
+        max-width: 430px;
+        padding: 30px;
+        border-radius: 30px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        position: relative;
+        z-index: 10;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+      }
+
+      p {
+        line-height: 1.8;
+        color: #555;
+      }
+
+      .btn {
+        margin-top: 20px;
+        padding: 14px 28px;
+        border: none;
+        border-radius: 50px;
+        background: #ff5d8f;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .envelope {
+        font-size: 90px;
+        cursor: pointer;
+        animation: bounce 1.5s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .letter {
+        margin-top: 20px;
+        padding: 20px;
+        background: #fff8fb;
+        border-radius: 20px;
+        text-align: left;
+      }
+
+      .typing {
+        white-space: pre-line;
+      }
+
+      .gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .gallery img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .final {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ff4d7d;
+      }
+
+      .balloon {
+        position: fixed;
+        bottom: -100px;
+        font-size: 30px;
+        animation: float linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes float {
+        to {
+          transform: translateY(-120vh);
+        }
+      }
+
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="screen">
+      <div class="card">
+        <div id="welcome">
+          <h1>🎂 Happy Birthday 🎂</h1>
+
+          <p>Untuk <b>Indriani Eka Suci</b></p>
+
+          <button class="btn" onclick="openEnvelope()">
+            Buka Pesan Rahasia ✨
+          </button>
+        </div>
+
+        <div id="envelopeSection" class="hidden">
+          <div class="envelope" onclick="showLetter()">📩</div>
+
+          <p>Klik amplopnya ya...</p>
+        </div>
+
+        <div id="letterSection" class="hidden">
+          <h2>💌 Surat Untukmu</h2>
+
+          <div class="letter">
+            <div id="typingText" class="typing"></div>
+          </div>
+
+          <button class="btn" onclick="showGallery()">Lihat Kenangan 📸</button>
+        </div>
+
+        <div id="gallerySection" class="hidden">
+          <h2>📸 Pose Cantik Guys</h2>
+
+          <div class="gallery">
+            <img src="assets/img/foto1.jpg" />
+
+            <img src="assets/img/foto2.jpg" />
+
+            <img src="assets/img/foto3.jpg" />
+
+            <img src="assets/img/foto4.jpg" />
+          </div>
+
+          <button class="btn" onclick="showFinal()">
+            Satu Pesan Terakhir ❤️
+          </button>
+        </div>
+
+        <div id="finalSection" class="hidden">
+          <h2>🎉 Selamat Ulang Tahun 🎉</h2>
+
+          <p class="final">
+            Semoga semua hal baik datang kepadamu hari ini dan seterusnya ❤️
+          </p>
+
+          <br />
+
+          <p>Dari manusia paling tampan di nuka bumi ini😜</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const text = `
+Halo kamu ayangcu yang sangat cantik dan imut, kemarin hari ulang tahunmu tetapi baru bisa kita rayakan hari ini. 
+Aku cuma mau ngucapin Happy Birthday to You manusia paling nyebelin sekaligus my love. 
+Semoga di ulang tahun mu yang ke-27 ini kamunya sehat selalu, terus semangat dan pastinya harus selalu bahagia terus ya sama aku. 
+Maafin ya aku cuma bisa ngado kamu sesuatu yang sederhana ini, semoga kamu suka ❤️
+
+Love You Ayang Nakal & Nyebelin ❤️
+`;
+
+      function openEnvelope() {
+        document.getElementById("welcome").classList.add("hidden");
+        document.getElementById("envelopeSection").classList.remove("hidden");
+      }
+
+      function showLetter() {
+        document.getElementById("envelopeSection").classList.add("hidden");
+        document.getElementById("letterSection").classList.remove("hidden");
+
+        typeWriter();
+
+        confetti();
+      }
+
+      function typeWriter() {
+        let i = 0;
+
+        function typing() {
+          if (i < text.length) {
+            document.getElementById("typingText").innerHTML += text.charAt(i);
+
+            i++;
+
+            setTimeout(typing, 35);
+          }
+        }
+
+        typing();
+      }
+
+      function showGallery() {
+        document.getElementById("letterSection").classList.add("hidden");
+        document.getElementById("gallerySection").classList.remove("hidden");
+      }
+
+      function showFinal() {
+        document.getElementById("gallerySection").classList.add("hidden");
+        document.getElementById("finalSection").classList.remove("hidden");
+
+        confetti();
+      }
+
+      function confetti() {
+        for (let i = 0; i < 120; i++) {
+          let c = document.createElement("div");
+
+          c.className = "confetti";
+
+          c.style.left = Math.random() * 100 + "vw";
+
+          c.style.top = "-20px";
+
+          c.style.background = `hsl(${Math.random() * 360},100%,50%)`;
+
+          document.body.appendChild(c);
+
+          let y = 0;
+
+          let speed = Math.random() * 5 + 2;
+
+          let interval = setInterval(() => {
+            y += speed;
+
+            c.style.transform = `translateY(${y}px) rotate(${y}deg)`;
+
+            if (y > window.innerHeight) {
+              clearInterval(interval);
+
+              c.remove();
+            }
+          }, 16);
+        }
+      }
+
+      for (let i = 0; i < 20; i++) {
+        let balloon = document.createElement("div");
+
+        balloon.className = "balloon";
+
+        balloon.innerHTML = "🎈";
+
+        balloon.style.left = Math.random() * 100 + "vw";
+
+        balloon.style.animationDuration = 8 + Math.random() * 8 + "s";
+
+        document.body.appendChild(balloon);
+      }
+    </script>
+  </body>
+</html>
